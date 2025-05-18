@@ -254,12 +254,11 @@ func main() {
 			}
 
 			message := strings.Join(args[2:], " ")
-			reply, senderID, err := nn.SendBytesRelaySync([]byte(message), targetID)
+			success, err := nn.SendBytesRelayAsync([]byte(message), targetID)
 			if err != nil {
 				fmt.Printf("Failed to send message: %v\n", err)
 			} else {
-				senderIDHex := hex.EncodeToString(senderID)
-				fmt.Printf("Message sent. Reply from %s: %s\n", senderIDHex, string(reply))
+				fmt.Printf("Message sent %v\n", success)
 			}
 
 		case "broadcast":
